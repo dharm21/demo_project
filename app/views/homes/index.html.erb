@@ -1,0 +1,29 @@
+<div class="project col-md-6">
+  <div class="">
+    <h3> Project lists </h3>
+    <% @projects.each_with_index do |project, index| %>
+      <%= project.name %>
+    <% end %>
+  </div>
+</div>
+<div class="category col-md-6">
+  <div >
+    <h3> Category lists </h3>
+    <% @categories.each_with_index do |category, index| %>
+      <%= category.name %>
+    <% end %>
+  </div>
+</div>
+
+<style type="text/css">
+ 	.project{
+ 		margin-top: 30px;
+ 	}
+ 	.category{
+ 		margin-top: 30px;
+ 	}
+ 	.project h3 , .category h3{
+ 		padding-top: 0px;
+ 		margin-top: 0px;
+ 	}
+</style>
