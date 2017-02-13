@@ -12,9 +12,9 @@ class CategoriesController < ApplicationController
   	@category = current_user.categories.new(category_params)
     respond_to do |format|
   	  if @category.save
-        format.js {redirect_to new_project_path}
+        format.js {}
   	  else
-        format.js {redirect_to :back}
+        format.js {}
   	  end
     end
   end
