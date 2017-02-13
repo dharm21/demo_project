@@ -10,11 +10,13 @@ class CategoriesController < ApplicationController
 
   def create
   	@category = current_user.categories.new(category_params)
-  	 if @category.save
-  	 	redirect_to root_path
-  	 else
-  	 	redirect_to :back
-  	 end
+    respond_to do |format|
+  	  if @category.save
+        format.js {redirect_to new_project_path}
+  	  else
+        format.js {redirect_to :back}
+  	  end
+    end
   end
 
   private

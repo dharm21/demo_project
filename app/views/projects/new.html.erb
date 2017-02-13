@@ -1,5 +1,11 @@
 <h3>New Project</h3>
-
 <%= render 'form', project: @project %>
+<%= render 'categories/form' %>
 
-<%#= link_to 'Back', projects_path %>
+<script type="text/javascript">
+  $(document).on('click', '.category', function(){
+ 
+  $('#myModal').modal();
+
+ });
+</script>

@@ -2,11 +2,18 @@
   <div class="well">
     <%= simple_form_for @project do |f| %> 
       <%= f.input :name %> <br>
-      <%= f.association :category,
-                      :input_html => {class: 'chosen-select',
-                                      multiple: false }, :include_blank => false %><br>
-       <%= f.button :submit %>
+      <%=f.association :category, :as => :collection_select, collection: current_user.categories.map{|t| [t.name, t.id]}.push(["other option",""]), :input_html => {class: "chosen-select", multiple: false}, :include_blank => false, :prompt => "select"%><br>
+      <%= f.button :submit %>
     <% end %>
   </div>
 </div>
 <%= link_to 'Back', root_path %>
+
+<script>
+ $(document).on('change', '#project_category_id', function(){
+ 	  var f = $( "#project_category_id option:selected" ).text();
+ 	  if(f == "other option"){
+ 	  	$('#myModal').modal();
+ 	  }
+  });
+</script>
