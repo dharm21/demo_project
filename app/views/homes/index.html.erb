@@ -1,17 +1,17 @@
-<div class="project col-md-6">
+<!-- <div class="project col-md-6">
   <div class="">
     <h3> Project lists </h3>
-    <% @projects.each_with_index do |project, index| %>
-      <%= project.name %>
-    <% end %>
+    <%# @projects.each_with_index do |project, index| %>
+      <%#= project.name %>
+    <%# end %>
   </div>
 </div>
 <div class="category col-md-6">
   <div >
     <h3> Category lists </h3>
-    <% @categories.each_with_index do |category, index| %>
-      <%= category.name %>
-    <% end %>
+    <%# @categories.each_with_index do |category, index| %>
+      <%#= category.name %>
+    <%# end %>
   </div>
 </div>
 
@@ -26,4 +26,90 @@
  		padding-top: 0px;
  		margin-top: 0px;
  	}
-</style>
+</style> -->
+<!-- 
+<div class="col-md-4">
+  <!-- <div class="panel panel-primary">
+    <div class="panel-heading">
+      <h3 class="panel-title">Listing</h3>
+      <span class="pull-right">
+        <ul class="nav panel-tabs">
+          <li><a href="#tab1" data-toggle="tab">All Projects </a></li>
+          <li><a href="#tab2" data-toggle="tab">All Categories </a>
+          </li>
+        </ul>
+      </span>
+    </div>
+    
+    <div class="panel-body">
+      <div class="tab-content">
+        <div class="tab-pane" id="tab1"> -->
+          <!-- <table class="table">
+            <tr><th> sr no </th>
+              <th> Categories</th>
+              <th> Projects</th>
+            </tr>  -->
+            <%#@projects.each_with_index do |project, index| %>
+              <!-- <tr>
+                <td><%#= index = "#{index+1}" %></td>
+                <td><%#= project.name%></td>
+              </tr> -->
+            <%# end %>
+             <%#@categories.each_with_index do |category, index| %>
+             <%# if category.user.eql?(current_user)%>
+             <!-- <tr> -->
+              <!-- <td><%#= index = "#{index+1}" %></td> -->
+              <!-- <td><%#= category.name%></td> -->
+            <!-- </tr> -->
+            <%#end %>
+          <%#end %>
+          <!-- </table>
+        </div> -->
+        
+       <!--  <div class="tab-pane" id="tab2">
+         <table class="table">
+          <tr>
+            <td>sr no</td>
+            <td>message:</td>
+          </tr>
+          <%# @categories.each_with_index do |category, index| %>
+            <%# if category.user.eql?(current_user)%>
+            <tr>
+              <td><%#= index = "#{index+1}" %></td>
+              <td><%#= category.name%></td>
+            </tr>
+            <%# end %>
+          <%# end %>
+          </table>
+        </div>
+      </div> -->
+    <!-- </div>
+  </div>
+</div>  -->
+
+
+
+<table class="table">
+  <thead>
+    <tr>
+      <th>Sr no</th>
+      <th>Category</th>
+      <th>Project</th>
+    </tr>
+  </thead>
+  <tbody>
+    <% @categories.each_with_index do |category, index| %>
+      <% if category.user.eql?(current_user)%>
+        <tr>
+          <td><%= index = "#{index+1}" %></td>
+          <td><%= category.name%></td>
+      <% end %>
+    <% end %>
+    <% @projects.each_with_index do |project, index| %>
+      <% if project.user.eql?(current_user)%>
+        <td><%= project.name%></td>
+        </tr>
+      <% end %>
+    <%end %>
+  </tbody>
+</table>
