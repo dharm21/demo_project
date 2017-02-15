@@ -3,18 +3,36 @@
   <div class="well">
     <%= simple_form_for @project do |f| %> 
       <%= f.input :name %> <br>
-      <%=f.association :category, :as => :collection_select, collection: current_user.categories.map{|t| [t.name, t.id]}.push(["other option",""]), :input_html => {class: "chosen-select", multiple: false}, :include_blank => false, :prompt => "select"%><br>
+      <%= f.association :category, collection: current_user.categories.map{|t| [t.name, t.id]}, include_blank: false, input_html: { class: 'chosen-select', multiple: false}, prompt: "select"%>
+      <br>
       <%= f.button :submit %>
     <% end %>
   </div>
 </div>
 <%= link_to 'Back', root_path %>
 </div>
+
+
 <script>
- $(document).on('change', '#project_category_id', function(){
- 	  var f = $( "#project_category_id option:selected" ).text();
- 	  if(f == "other option"){
- 	  	$('#myModal').modal();
- 	  }
-  });
+ 	$(function() {
+	  return $('.chosen-select').chosen({
+	    no_results_text: 'No result found. Press enter to add',
+	    width: '200px'
+	  });
+	});
+
+ 	$(document).on('keydown', '.chosen-container', function (event) {
+    if (event.which == 13 ) {
+      $.ajax({
+		    type: "POST",
+		    url: '/categories',
+		    dataType: "JSON",
+		    data: { category: {name: $(event.target).val()}},
+		    success: function(data) {
+		    	$(".chosen-select").append('<option value="' + data.id + '" selected="selected">' + data.name + '</option>');
+    			$(".chosen-select").trigger('chosen:updated');
+		    }
+		  });
+    }    
+	});
 </script>

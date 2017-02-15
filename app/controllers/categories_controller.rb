@@ -10,17 +10,18 @@ class CategoriesController < ApplicationController
 
   def create
   	@category = current_user.categories.new(category_params)
-    respond_to do |format|
-  	  if @category.save
-        format.js {}
+	  respond_to do |format|
+      if @category.save
+        format.json { render json: @category }
   	  else
-        format.js {}
+        format.json { render json: @category.errors.full_messages }
   	  end
     end
   end
 
   private
-  def category_params
-  	params.require(:category).permit(:name, :user_id)
-  end
+
+    def category_params
+    	params.require(:category).permit(:name)
+    end
 end
